@@ -23,7 +23,6 @@ let firebaseConfig = {
     //sotrageURL: "gs://test-f8ea4.appspot.com/",
   };
 
-  console.log(firebaseConfig);
 
 // const config = {
 //   apiKey: process.env.REACT_APP_API_KEY,
