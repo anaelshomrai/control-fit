@@ -1,0 +1,38 @@
+.cardWrapper {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .overlay {
+    color: black;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  .overlay {
+    position: absolute;
+    background-color: rgb(121 123 131 / 89%);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    text-align: center;
+  }
+
+.cardWrapper:hover  .overlay {
+      display: block;
+      display: flex;
+      flex-direction:column;
+      justify-content:center;
+        width:100%;
+      height:100%;
+  }
+
+  .fixCardPadding{
+    padding: 8px;
+  }
+
+  .resizeCardTitle {
+    font-size: 1.4em;
+  }

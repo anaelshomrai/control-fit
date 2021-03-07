@@ -1,0 +1,4 @@
+.ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
+    right: 0 !important;
+    left: auto !important;
+  }

@@ -1,0 +1,17 @@
+.dialogSize {
+    height: 100%;
+    width: 70% !important; 
+}
+
+.dialogSizeMobile {
+    height: 100%;
+}
+
+.dialogSizeTab {
+
+}
+
+.dialogSizeLogin {
+    width: 50% !important;
+}
+

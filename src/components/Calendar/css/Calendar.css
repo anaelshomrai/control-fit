@@ -1,0 +1,36 @@
+.demo-app {
+    display: flex;
+    min-height: 100%;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+
+  
+  .demo-app-sidebar-section {
+    padding: 2em;
+    line-height: 1.5;
+    background: #eaf9ff;
+    border-right: 1px solid #d3e2e8;
+  }
+  
+  .demo-app-main {
+    flex-grow: 1;
+    /* padding: 3em; */
+  }
+  /* .fc .fc-toolbar.fc-header-toolbar */
+
+  /* .fc-toolbar.fc-header-toolbar {
+    width: 100%;
+    display: block;
+} */
+
+@media (max-width: 767.98px) {
+  .fc .fc-toolbar.fc-header-toolbar {
+      display: block;
+      text-align: center;
+  }
+
+  .fc-header-toolbar .fc-toolbar-chunk {
+      display: block;
+  }
+}

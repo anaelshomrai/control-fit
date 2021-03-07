@@ -1,5 +1,27 @@
+.logo {
+  height: 140px;
+  margin: 16px;
+  /*background: rgba(255, 255, 255, 0.3);*/
+  background: url('/src/logos/logo-white.jpg') no-repeat center center;
+  background-size: contain;
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+.site-layout-background {
+  padding: 24;
+  min-height: 100%;
+   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .App {
   text-align: center;
+  /* height:100%;
+  overflow: scroll; */
 }
 
 .App-logo {

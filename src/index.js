@@ -3,11 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import { StylesProvider } from '@material-ui/core';
+import { BrowserRouter } from 'react-router-dom'
+import './i18n/i18n';
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
+    <StylesProvider injectFirst>
+ <BrowserRouter>
     <App />
-  </React.StrictMode>,
+   </BrowserRouter> 
+    </StylesProvider>
+  // </React.StrictMode>
+  ,
   document.getElementById('root')
 );
 

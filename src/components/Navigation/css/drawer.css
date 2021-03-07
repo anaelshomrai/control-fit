@@ -1,0 +1,17 @@
+.belowHeader {
+    top: 64px;
+    width: 50%;
+}
+
+.centerListItem {
+    text-align: center;
+}
+
+.fixTextAlign {
+    text-align: start !important;
+}
+
+.MuiListItem-gutters {
+    padding-right: 8px !important;
+    padding-left: 8px !important;
+}
