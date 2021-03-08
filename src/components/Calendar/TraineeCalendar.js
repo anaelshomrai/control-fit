@@ -104,7 +104,7 @@ export default function TraineeCalendar(props) {
           {eventInfo?.event?.extendedProps?.selectedTrainees &&
             eventInfo.event.extendedProps.selectedTrainees.length > 0 && (
               <div>
-                {t("CALENDAR_TRAINEES")}
+                {t("CALENDAR_TRAINEES")} &nbsp;
                 {eventInfo.event.extendedProps.selectedTrainees
                   .map((t) => {
                     return t.name;

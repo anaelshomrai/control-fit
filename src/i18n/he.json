@@ -32,7 +32,7 @@
     "EVENT_DATE_CANCEL": "ביטול",
     "EVENT_DATE_CLEAR": "נקה", 
 
-    "CALENDAR_TRAINEES": "מתאמנים",
+    "CALENDAR_TRAINEES": ":מתאמנים",
     "CALENDAR_TITLE": "לוח שנה",
     "CALENDAR_LOADING" : "טוען אירועים...",
     "CALEDNAR_HEADER_TOOLBAR_TODAY": "היום",
