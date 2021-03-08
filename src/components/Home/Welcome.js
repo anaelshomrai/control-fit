@@ -10,6 +10,7 @@ import {
   Card,
   CardContent,
   Typography,
+  useTheme,
 } from "@material-ui/core";
 import ControlFitContext from "../Context/ControlFitContext";
 import { useTranslation } from "react-i18next";
@@ -31,6 +32,8 @@ export default function Welcome() {
   const apiUrl = process.env.REACT_APP_OPEN_WEATHER_API_URL;
   const imageUrl = process.env.REACT_APP_OPEN_WEATHER_API_IMAGE_URL;
 
+  const theme = useTheme();
+
   useEffect(() => {
     auth.user.providerData.forEach(function (profile) {
       // console.log("Sign-in provider: " + profile.providerId);
@@ -38,9 +41,12 @@ export default function Welcome() {
       // console.log("  Name: " + profile.displayName);
       // console.log("  Email: " + profile.email);
       // console.log("  Photo URL: " + profile.photoURL);
-      setName(profile.displayName);
+      let split = theme.chosenLang === "en" ? profile.displayName.split("|")[0] : profile.displayName.split("|")[1];
+
+      setName(split);
     });
-  }, [auth.user]);
+  },[theme.direction,theme.chosenLang,auth.user])
+
 
   useEffect(() => {
     setGreeting(t("WELCOME_HELLO"));

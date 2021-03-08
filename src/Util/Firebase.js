@@ -221,8 +221,7 @@ export const sendPasswordResetEmail = (emailAddress) => {
 
 export const oneTimeNameUpdate = (emailAddress) => {
   auth.currentUser.updateProfile({
-    displayName: "Anael Shomrai",
-    name: "Anael Shomrai"
+    displayName: "Golan Zalman|גולן זלמן",
   }).then(function() {
     // Update successful.
   }).catch(function(error) {
