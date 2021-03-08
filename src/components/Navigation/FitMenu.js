@@ -210,7 +210,6 @@ export default function FitMenu(props) {
                   setShowEventDialog(true);
                 }}
                 primary={
-                  // `You have " ${note.title} at ${note.startStr}`
                   <>
                     <Typography
                       component="span"

@@ -172,6 +172,123 @@ export default function TraineeHome(props) {
 
   };
 
+  const addTraineeV2 = async (addedTrainee) => {
+    let id = -1;
+    let strippedTrainee = { ...addedTrainee };
+    delete strippedTrainee.images;
+    delete strippedTrainee.health;
+    delete strippedTrainee.program;
+    delete strippedTrainee.profilePicture;
+    console.warn("starting");
+    let addTraineeRes = await addTrainee(strippedTrainee);
+    console.warn("S1-GOT TRAINEE ID");
+    id = addTraineeRes.id;
+    addedTrainee.docId = id;
+    try {
+    let excautionResult = await Promise.all([
+      (async () => {
+        console.warn("S1-IMAGES START");
+        let imagesUpdated = await Promise.all(
+          addedTrainee.images.map(async (e) => {
+            let newFile = {
+              name:
+                id +
+                "/images/" +
+                e.file.name.split(".")[0] +
+                "-" +
+                new Date().getTime() +
+                "." +
+                e.file.name.split(".")[1],
+              path: e.file.path,
+              type: e.file.type,
+            };
+            await uploadFile(newFile.name, e.file);
+            //console.warn("S1-1-IMAGES", newFile.name);
+            return newFile;
+          })
+        );
+        addedTrainee.images = imagesUpdated;
+        await addTraineeFilesIntial(id, addedTrainee.images, "images");
+        console.warn("S1-IMAGES DONE");
+      })(),
+      (async() => {
+        if (addedTrainee.profilePicture) {
+          console.warn("S1-PROFILE START");
+          let stripped = {
+            name:
+              id +
+              "/profilePicture/" +
+              addedTrainee.profilePicture.name.split(".")[0] +
+              "-" +
+              new Date().getTime() +
+              "." +
+              addedTrainee.profilePicture.name.split(".")[1],
+            type: addedTrainee.profilePicture.type,
+          };
+          await uploadFile(stripped.name, addedTrainee.profilePicture);
+          await addTraineeFilesIntial(id, stripped, "profilePicture");
+          console.warn("S1-PROFILE DONE");
+        }
+      })(),
+      (async() => {
+        console.warn("S1-HEALTH START");
+        var healthUpdated = await Promise.all(
+          addedTrainee.health.map(async (e) => {
+            let newFile = {
+              name:
+                id +
+                "/health/" +
+                e.file.name.split(".")[0] +
+                "-" +
+                new Date().getTime() +
+                "." +
+                e.file.name.split(".")[1],
+              path: e.file.path,
+              type: e.file.type,
+            };
+            await uploadFile(newFile.name, e.file);
+            return newFile;
+          })
+        );
+        addedTrainee.health = healthUpdated;
+        await addTraineeFilesIntial(id, addedTrainee.health, "health");
+        console.warn("S1-HEALTH DONE");
+      })(),
+      (async() => {
+        console.warn("S1-PROGRAM START");
+        var programUpdated = await Promise.all(
+          addedTrainee.program.map(async (e) => {
+            let prog = {
+              name:
+                id +
+                "/program/" +
+                e.file.name.split(".")[0] +
+                "-" +
+                new Date().getTime() +
+                "." +
+                e.file.name.split(".")[1],
+              path: e.file.path,
+              type: e.file.type,
+              html: e.html,
+            };
+            let progId = await addTraineesProgram(prog, "program");
+          //  console.warn("S3-1-program", progId);
+            let progRef = { id: progId.id };
+            return progRef;
+          })
+        );
+        addedTrainee.program = programUpdated;
+        await addTraineeFilesIntial(id, addedTrainee.program, "program");
+        console.warn("S1-PROGRAM DONE");
+      })(),
+    ]);
+  } catch (e) {
+    console.error("result from ss", e);
+    return Promise.reject(new Error(e));
+  }
+
+  }
+
   const addTraineeFB = async (addedTrainee) => {
     try {
       let id = -1;
@@ -294,7 +411,7 @@ export default function TraineeHome(props) {
   };
 
   const handleSubmit = (e, trainee) => {
-    return addTraineeFB(trainee);
+    return addTraineeV2(trainee);
   };
 
   return (

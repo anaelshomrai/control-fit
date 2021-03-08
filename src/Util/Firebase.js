@@ -48,7 +48,7 @@ app.performance();
 const traineesCollection = "trainees";
 const orderBy = "created";
 
-const idsCollection = "ID";
+const idsCollection = "IDs";
 const idDoc = "eventIds";
 
 const calendarCollection = "events";
