@@ -323,7 +323,7 @@ export default function FullEvent({
                         className="fas fa-times"
                       />
                     </IconButton>
-                    {isEditMode ? "Workout Details" : t("EVENT_ADD_WORKOUT")}
+                    {isEditMode ? t("EVENT_EDIT_WORKOUT") : t("EVENT_ADD_WORKOUT")}
                   </DialogTitle>
                   {!isEditMode && (
                     <DialogContentText style={{ textAlign: "start" }}>

@@ -14,6 +14,7 @@
     "EVENT_START_REQUIRED": "Start date is required",
     "EVENT_END_REQUIRED": "End date is required when All Day option is off",
     "EVENT_ADD_WORKOUT": "Add Workout",
+    "EVENT_EDIT_WORKOUT": "Event Details",
     "EVENT_ALL_DAY_REQUIRED": "All day indiciation is required",
     "EVENT_FORM_NOTE": "In order to keep track of trainees workout, please attach relevant trainee.",
     "EVENT_ALL_DAY": "All day",

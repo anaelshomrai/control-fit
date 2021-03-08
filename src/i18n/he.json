@@ -15,6 +15,7 @@
     "EVENT_START_REQUIRED": "יש להזין תאריך תחילת האירוע",
     "EVENT_END_REQUIRED": "תאריך סוף האירוע דרוש כאשר האירוע נמשך כל היום",
     "EVENT_ADD_WORKOUT": "הוסף אימון",
+    "EVENT_EDIT_WORKOUT": "פרטי אירוע",
     "EVENT_ALL_DAY_REQUIRED": "נא לסמן האם האירוע נמשך כל היום",
     "EVENT_FORM_NOTE": "על מנת לעקוב אחרי האימונים של המתאמן, אנא בחר את המתאמן הרלוונטי.",
     "EVENT_ALL_DAY": "כל היום",
