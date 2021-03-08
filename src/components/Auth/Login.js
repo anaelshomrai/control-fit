@@ -320,10 +320,10 @@ export default function Login(props) {
                 }}
               >
                 <TextField
-                  style={{
-                    width: "60%",
+                  style={isTabletOrMobile ? {
+                    width: "90%",
                     //     border: "1px solid rgb(63 81 181)",
-                  }}
+                  } : { width: "60%",}}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -376,10 +376,10 @@ export default function Login(props) {
                 }}
               >
                 <TextField
-                  style={{
-                    width: "60%",
-                    //  border: "1px solid rgb(63 81 181)",
-                  }}
+                   style={isTabletOrMobile ? {
+                    width: "90%",
+                    //     border: "1px solid rgb(63 81 181)",
+                  } : { width: "60%",}}
                   id="password"
                   name="password"
                   type="password"

@@ -105,7 +105,7 @@
 
     "TRAINEE_DETAILS_PROFILE": "העלאת תמונת פרופיל למתאמן",
 
-    "TRAINEE_DETAILS_PROFILE_UPLOAD": "גרור ושחרר תמונות לכאן או לחץ (רק תמונה אחת מותרת)",
+    "TRAINEE_DETAILS_PROFILE_UPLOAD": "גרור ושחרר תמונה לכאן או לחץ (רק תמונה אחת מותרת)",
     "TRAINEE_DETAILS_PROFILE_ERROR": "משהו לא עבד כצפוי.. נסה שנית מאוחר יותר",
     "TRAINEE_TAB_DETAILS": "פרטים",
     "TRAINEE_TAB_PROGRAM": "תוכנית אימונים",
@@ -153,7 +153,7 @@
     "TRAINEE_PROGRAM_TAB_ADD_ERROR": "הייתה בעיה בעת הוספת התוכנית. נא נסה שנית מאוחר יותר.",
     "TRAINEE_PROGRAM_TAB_DELETE_ERROR": "הייתה בעיה בעת מחיקת התוכנית. נא נסה שנית מאוחר יותר.",
     "TRAINEE_PROGRAM_UPLOAD_TITLE": "תוכניות אימון",
-    "TRAINEE_PROGRAM_UPLOAD_HEALTH": "גרור ושחרר תמונות לכאן או לחץ",
+    "TRAINEE_PROGRAM_UPLOAD_HEALTH": "גרור ושחרר תוכניות אימונים לכאן או לחץ",
     "TRAINEE_PROGRAM_UNAVAILABLE": "לא נמצאו תוכניות אימון",
     "TRAINEE_PROGRAM_TITLE": "תוכניות אימון",
     "TRAINEE_PROGRAM_PLACEHOLDER": "כתוב כאן...",
@@ -194,9 +194,9 @@
     "TRAINEE_UPLOAD_SECTION_IMAGE_TITLE": "העלאת תמונות",
     "TRAINEE_UPLOAD_SECTION_IMAGE_UPLOAD": "גרור ושחרר תמונות לכאן או לחץ",
     "TRAINEE_UPLOAD_SECTION_PROGRAM_TITLE": "העלאת תוכנית אימונים",
-    "TRAINEE_UPLOAD_SECTION_PROGRAM_UPLOAD": "גרור ושחרר תמונות לכאן או לחץ",
+    "TRAINEE_UPLOAD_SECTION_PROGRAM_UPLOAD": "גרור ושחרר תוכניות אימונים לכאן או לחץ",
     "TRAINEE_UPLOAD_SECTION_HEALTH_TITLE": "העלאת הצהרת בריאות",
-    "TRAINEE_UPLOAD_SECTION_HEALTH_UPLOAD": "גרור ושחרר תמונות לכאן או לחץ",
+    "TRAINEE_UPLOAD_SECTION_HEALTH_UPLOAD": "גרור ושחרר הצהרת בריאות לכאן או לחץ",
 
     "DROPZONE_FILE_ADDED": "הקובץ {{name}} נוסף בהצלחה",
     "DROPZONE_FILE_LIMIT": "חריגה ממספר הקבצים המקסימלי המותר. מותר רק {{limit}}",
