@@ -21,35 +21,34 @@ import { Alert } from "@material-ui/lab";
 import { useTranslation } from "react-i18next";
 import { useStyles } from "@material-ui/pickers/views/Calendar/SlideTransition";
 import { green } from "@material-ui/core/colors";
-import clsx from 'clsx';
 
 const useMyStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
   },
   wrapper: {
     margin: theme.spacing(1),
-    position: 'relative',
+    position: "relative",
   },
   buttonSuccess: {
     backgroundColor: green[500],
-    '&:hover': {
+    "&:hover": {
       backgroundColor: green[700],
     },
   },
   fabProgress: {
     color: green[500],
-    position: 'absolute',
+    position: "absolute",
     top: -6,
     left: -6,
     zIndex: 1,
   },
   buttonProgress: {
     color: green[500],
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
     marginTop: -12,
     marginLeft: -12,
   },
@@ -57,22 +56,16 @@ const useMyStyles = makeStyles((theme) => ({
 export default function DetailsTab({ id, trainee, handleDetailsUpdate }) {
   const [disabled, setDisabled] = useState(true);
   const isTabletOrMobile = useMediaQuery("(max-width: 1224px)");
-  const [isError,setIsError] = useState(false);
+  const [isError, setIsError] = useState(false);
   const { t } = useTranslation();
   const theme = useTheme();
-  const [direction,setDirection] = useState(theme.direction);
+  const [direction, setDirection] = useState(theme.direction);
   const classes = useMyStyles();
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-
-  const buttonClassname = clsx({
-    [classes.buttonSuccess]: success,
-  });
 
   useEffect(() => {
     setDirection(theme.direction);
-  },[theme.direction,theme.chosenLang])
-
+  }, [theme.direction, theme.chosenLang]);
 
   return (
     <Formik
@@ -88,31 +81,29 @@ export default function DetailsTab({ id, trainee, handleDetailsUpdate }) {
       enableReinitialize={true}
       onSubmit={(values, { setSubmitting }) => {
         if (!loading) {
-      setSuccess(false);
-      setLoading(true);
-
-    }
+          setLoading(true);
+        }
         handleDetailsUpdate(values)
           .then((res) => {
             setDisabled(!disabled);
             setIsError(false);
-            setSuccess(true);
             setLoading(false);
           })
           .catch((e) => {
-        setLoading(false);
+            setLoading(false);
             console.error("formik error", e);
             setIsError(t("TRAINEE_DETAILS_TAB_UPDATE_ERROR"));
           });
       }}
       validationSchema={Yup.object().shape({
         name: Yup.string().required(t("TRAINEE_FROM_NAME_REQUIRED")),
-        phone: Yup.string().matches(phoneRegExp, {
-          message: t("TRAINEE_FROM_PHONE_REQUIRED"),
-          excludeEmptyString: true,
-        }).length(10),
-        email: Yup.string()
-        .email(t("TRAINEE_FROM_EMAIL_REQUIRED"))
+        phone: Yup.string()
+          .matches(phoneRegExp, {
+            message: t("TRAINEE_FROM_PHONE_REQUIRED"),
+            excludeEmptyString: true,
+          })
+          .length(10),
+        email: Yup.string().email(t("TRAINEE_FROM_EMAIL_REQUIRED")),
       })}
     >
       {(props) => {
@@ -123,7 +114,7 @@ export default function DetailsTab({ id, trainee, handleDetailsUpdate }) {
           handleChange,
           handleSubmit,
           handleReset,
-          setErrors
+          setErrors,
         } = props;
         return (
           <form
@@ -146,26 +137,25 @@ export default function DetailsTab({ id, trainee, handleDetailsUpdate }) {
               }}
               spacing={1}
             >
-      {isError && (
-        <ClickAwayListener
-          onClickAway={() => {
-            setIsError(false);
-          }}
-        >
-          <Alert
-            style={{
-              width: "100%",
-              justifyContent: "center",
-            }}
-            severity="error"
-          >
-            {isError}
-          </Alert>
-        </ClickAwayListener>
-      )}
-<Grid item xs={12} lg={12} md={12} sm={12} xl={12} align="center">
-
-              <h3>{t("TRAINEE_DETAILS_TITLE")}</h3>
+              {isError && (
+                <ClickAwayListener
+                  onClickAway={() => {
+                    setIsError(false);
+                  }}
+                >
+                  <Alert
+                    style={{
+                      width: "100%",
+                      justifyContent: "center",
+                    }}
+                    severity="error"
+                  >
+                    {isError}
+                  </Alert>
+                </ClickAwayListener>
+              )}
+              <Grid item xs={12} lg={12} md={12} sm={12} xl={12} align="center">
+                <h3>{t("TRAINEE_DETAILS_TITLE")}</h3>
               </Grid>
 
               <Grid item xs={3} lg={3} md={3} sm={3} xl={3} align="center">
@@ -224,16 +214,20 @@ export default function DetailsTab({ id, trainee, handleDetailsUpdate }) {
                   value={values.gender}
                   style={{ alignItems: "center" }}
                 >
-                  {[t("TRAINEE_DETAILS_GENDER_OPTION_MALE"), t("TRAINEE_DETAILS_GENDER_OPTION_FEMALE")].map((option) => (
+                  {[
+                    t("TRAINEE_DETAILS_GENDER_OPTION_MALE"),
+                    t("TRAINEE_DETAILS_GENDER_OPTION_FEMALE"),
+                  ].map((option) => (
                     <FormControlLabel
                       key={option}
                       value={option}
                       control={<Radio />}
                       label={option}
-                      style={isTabletOrMobile
-                        ? { width: "85%", padding: "6px 12px" }
-                        : { width: "60%", padding: "6px 12px" }
-                  }
+                      style={
+                        isTabletOrMobile
+                          ? { width: "85%", padding: "6px 12px" }
+                          : { width: "60%", padding: "6px 12px" }
+                      }
                       disabled={disabled}
                     />
                   ))}
@@ -247,7 +241,7 @@ export default function DetailsTab({ id, trainee, handleDetailsUpdate }) {
                   component="legend"
                   style={{ padding: "12px", textAlign: "end" }}
                 >
-                 {t("TRAINEE_DETAILS_AGE_LABEL")}
+                  {t("TRAINEE_DETAILS_AGE_LABEL")}
                 </FormLabel>
               </Grid>
 
@@ -286,7 +280,7 @@ export default function DetailsTab({ id, trainee, handleDetailsUpdate }) {
                   component="legend"
                   style={{ padding: "12px", textAlign: "end" }}
                 >
-                 {t("TRAINEE_DETAILS_WEIGHT_LABEL")}
+                  {t("TRAINEE_DETAILS_WEIGHT_LABEL")}
                 </FormLabel>
               </Grid>
 
@@ -357,7 +351,6 @@ export default function DetailsTab({ id, trainee, handleDetailsUpdate }) {
                   helperText={errors.phone && touched.phone && errors.phone}
                 />
               </Grid>
-              
 
               <Grid item xs={3} lg={3} md={3} sm={3} xl={3} align="center">
                 <FormLabel
@@ -443,40 +436,41 @@ export default function DetailsTab({ id, trainee, handleDetailsUpdate }) {
             <Grid
               container
               style={
-                isTabletOrMobile && direction === "rtl" ?
-                {
+                isTabletOrMobile && direction === "rtl"
+                  ? {
                       alignItems: "flex-end",
                       position: "fixed",
                       left: "2%",
                       bottom: "55px",
                       flexDirection: "column",
-                      width: "15%"
-                } : isTabletOrMobile && direction === "ltr" ?
-                {
-                      alignItems: "flex-end",
-                      position: "fixed",
-                      right: "2%",
-                      bottom: "55px",
-                      flexDirection: "column",
-                      width: "15%"
-                    } : !isTabletOrMobile && direction === "rtl" ?
-                    {
-                      alignItems: "flex-end",
-                      position: "fixed",
-                      left: "2%",
-                      bottom: "55px",
-                      flexDirection: "row-reverse",
-                      width: "fit-content"
-                    } : 
-                    {
-                      alignItems: "flex-end",
-                      position: "fixed",
-                      right: "2%",
-                      bottom: "55px",
-                      flexDirection: "row-reverse",
-                      width: "fit-content"
+                      width: "15%",
                     }
-
+                  : isTabletOrMobile && direction === "ltr"
+                  ? {
+                      alignItems: "flex-end",
+                      position: "fixed",
+                      right: "2%",
+                      bottom: "55px",
+                      flexDirection: "column",
+                      width: "15%",
+                    }
+                  : !isTabletOrMobile && direction === "rtl"
+                  ? {
+                      alignItems: "flex-end",
+                      position: "fixed",
+                      left: "2%",
+                      bottom: "55px",
+                      flexDirection: "row-reverse",
+                      width: "fit-content",
+                    }
+                  : {
+                      alignItems: "flex-end",
+                      position: "fixed",
+                      right: "2%",
+                      bottom: "55px",
+                      flexDirection: "row-reverse",
+                      width: "fit-content",
+                    }
               }
               spacing={2}
             >
@@ -488,9 +482,8 @@ export default function DetailsTab({ id, trainee, handleDetailsUpdate }) {
                     size={isTabletOrMobile ? "small" : "medium"}
                     onClick={(e) => {
                       setDisabled(!disabled);
-                      setErrors({})
+                      setErrors({});
                       handleReset({});
-
                     }}
                   >
                     <Icon>close</Icon>
@@ -519,7 +512,6 @@ export default function DetailsTab({ id, trainee, handleDetailsUpdate }) {
                     type="submit"
                     variant="extended"
                     color="primary"
-                    className={buttonClassname}
                     disabled={loading}
                     size={isTabletOrMobile ? "small" : "medium"}
                     onClick={(e) => {
@@ -530,7 +522,12 @@ export default function DetailsTab({ id, trainee, handleDetailsUpdate }) {
                     <Icon>save</Icon>
 
                     {isTabletOrMobile ? "" : t("SAVE")}
-                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                    {loading && (
+                      <CircularProgress
+                        size={24}
+                        className={classes.buttonProgress}
+                      />
+                    )}
                   </Fab>
                 )}
               </Grid>

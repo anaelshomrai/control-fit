@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import {signIn,signOut,auth
+import {signIn,signOut
  //, oneTimeNameUpdate
- } from '../../Util/Firebase';
+ } from "../../services/FirebaseGeneralService";
+ import {auth} from "../../Util/Firebase";
 
 export default function useProvideAuth() {
     const [user, setUser] = useState(null);

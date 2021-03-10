@@ -27,16 +27,19 @@ import "./css/tabs.css";
 import ProgramTab from "./Tab/ProgramTab";
 import HealthTab from "./Tab/HealthTab";
 import {
-  storageRef,
   updateTrainee,
   updateTraineeField,
-  uploadFile,
+} from "../../services/FirebaseTraineesService";
+import {
   addTraineesProgram,
   deleteProgram,
-} from "../../Util/Firebase";
+} from "../../services/FirebaseProgramsService";
+import {
+  uploadFile,
+} from "../../services/FirebaseGeneralService";
+import {storageRef} from "../../Util/Firebase";
 import ControlFitContext from "../Context/ControlFitContext";
 import { Alert } from "@material-ui/lab";
-import clsx from "clsx";
 import {
   HEALTH,
   IMAGES,
@@ -150,9 +153,6 @@ export default function TraineeDetails(props) {
   const [profileLoading, setProfileLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const buttonClassname = clsx({
-    [classes.buttonSuccess]: success,
-  });
 
   useEffect(() => {
     if (
@@ -706,7 +706,6 @@ export default function TraineeDetails(props) {
                         color="primary"
                         variant="extended"
                         size={"small"}
-                        className={buttonClassname}
                         onClick={(e) => {
                           setShowProfilePicDialog(!showProfilePicDialog);
                         }}
@@ -810,7 +809,6 @@ export default function TraineeDetails(props) {
                         color="primary"
                         variant="extended"
                         size={"small"}
-                        className={buttonClassname}
                         onClick={(e) => {
                           setShowProfilePicDialog(!showProfilePicDialog);
                         }}

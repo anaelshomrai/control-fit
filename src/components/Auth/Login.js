@@ -17,39 +17,38 @@ import {
 } from "@material-ui/core";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { sendPasswordResetEmail } from "../../Util/Firebase";
+import { sendPasswordResetEmail } from "../../services/FirebaseGeneralService";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../TraineeForm/css/dialog.css";
 import { green } from "@material-ui/core/colors";
-import clsx from 'clsx';
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
   },
   wrapper: {
     margin: theme.spacing(1),
-    position: 'relative',
+    position: "relative",
   },
   buttonSuccess: {
     backgroundColor: green[500],
-    '&:hover': {
+    "&:hover": {
       backgroundColor: green[700],
     },
   },
   fabProgress: {
     color: green[500],
-    position: 'absolute',
+    position: "absolute",
     top: -6,
     left: -6,
     zIndex: 1,
   },
   buttonProgress: {
     color: green[500],
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
     marginTop: -12,
     marginLeft: -12,
   },
@@ -64,13 +63,8 @@ export default function Login(props) {
   const [resetMessage, setResetMessage] = useState();
   const [resetStatus, setResetStatus] = useState(0);
   const isTabletOrMobile = useMediaQuery("(max-width: 1224px)");
-  const [success, setSuccess] = useState(false);
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
-
-  const buttonClassname = clsx({
-    [classes.buttonSuccess]: success,
-  });
 
   const login = async (values) => {
     const res = await auth.signin(values.username, values.password);
@@ -103,20 +97,16 @@ export default function Login(props) {
       enableReinitialize={true}
       onSubmit={(values, { setSubmitting }) => {
         if (!loading) {
-      setSuccess(false);
-      setLoading(true);
-    
-    }
+          setLoading(true);
+        }
         login(values).then((res) => {
-          console.log("res",res);
+          console.log("res", res);
           if (res) {
             setLoading(false);
           } else {
             history.push("/");
-            setSuccess(true);
             setLoading(false);
           }
-          
         });
       }}
       validationSchema={Yup.object().shape({
@@ -378,10 +368,14 @@ export default function Login(props) {
                 }}
               >
                 <TextField
-                  style={isTabletOrMobile ? {
-                    width: "90%",
-                    //     border: "1px solid rgb(63 81 181)",
-                  } : { width: "60%",}}
+                  style={
+                    isTabletOrMobile
+                      ? {
+                          width: "90%",
+                          //     border: "1px solid rgb(63 81 181)",
+                        }
+                      : { width: "60%" }
+                  }
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
@@ -434,10 +428,14 @@ export default function Login(props) {
                 }}
               >
                 <TextField
-                   style={isTabletOrMobile ? {
-                    width: "90%",
-                    //     border: "1px solid rgb(63 81 181)",
-                  } : { width: "60%",}}
+                  style={
+                    isTabletOrMobile
+                      ? {
+                          width: "90%",
+                          //     border: "1px solid rgb(63 81 181)",
+                        }
+                      : { width: "60%" }
+                  }
                   id="password"
                   name="password"
                   type="password"
@@ -461,7 +459,11 @@ export default function Login(props) {
                 />
               </Grid>
 
-              {isError && <div style={{color: "red"}} className="text-danger">{isError}</div>}
+              {isError && (
+                <div style={{ color: "red" }} className="text-danger">
+                  {isError}
+                </div>
+              )}
 
               <Grid
                 item
@@ -475,28 +477,30 @@ export default function Login(props) {
                   paddingInlineEnd: "8px",
                 }}
               >
-
-<div className={classes.wrapper}>
-                <Fab
-                  type="submit"
-                  variant="extended"
-                  color="primary"
-                  className={buttonClassname}
-                  disabled={loading}
-                  size={"medium"}
-                  onClick={(e) => {
-                    handleSubmit(e);
-                  }}
-                >
-                  {t("LOGIN_TITLE")} &nbsp;
-                  {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
-                  <Icon
-                    style={{ fontSize: "1.4em" }}
-                    className="fas fa-sign-in-alt"
-                  />
-                </Fab>
-               
-      </div>
+                <div className={classes.wrapper}>
+                  <Fab
+                    type="submit"
+                    variant="extended"
+                    color="primary"
+                    disabled={loading}
+                    size={"medium"}
+                    onClick={(e) => {
+                      handleSubmit(e);
+                    }}
+                  >
+                    {t("LOGIN_TITLE")} &nbsp;
+                    {loading && (
+                      <CircularProgress
+                        size={24}
+                        className={classes.buttonProgress}
+                      />
+                    )}
+                    <Icon
+                      style={{ fontSize: "1.4em" }}
+                      className="fas fa-sign-in-alt"
+                    />
+                  </Fab>
+                </div>
               </Grid>
 
               <Grid

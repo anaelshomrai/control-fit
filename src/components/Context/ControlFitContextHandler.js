@@ -4,12 +4,15 @@ import moment from "moment";
 import { useEffect } from "react";
 import {
   getRecentTrainees,
-  firestore,
-  getTraineesProgram,
-  getNotifications,
   getNotificationOfTrainee,
-  auth as lis,
-} from "../../Util/Firebase";
+} from "../../services/FirebaseTraineesService";
+import {
+  getNotifications,
+} from "../../services/FirebaseEventsService";
+import {
+  getTraineesProgram,
+} from "../../services/FirebaseProgramsService";
+import {auth as lis,firestore} from "../../Util/Firebase";
 import { useAuth } from "../Auth/ProvideAuth";
 
 export default function ControlFitContextHanlder({ children }) {

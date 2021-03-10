@@ -1,13 +1,17 @@
 import { useEffect, useState, useRef, useContext } from "react";
 import {
-  updateEvent,
-  deleteEvent,
-  getCurrentIds,
-  increaseEventId,
-  addEvent,
   getTraineeWorkouts,
   updateTraineeField,
-} from "../../Util/Firebase";
+} from "../../services/FirebaseTraineesService";
+import {
+  updateEvent,
+  deleteEvent,
+  addEvent,
+} from "../../services/FirebaseEventsService";
+import {
+  getCurrentIds,
+  increaseEventId,
+} from "../../services/FirebaseIDsService";
 import FullCalendar from "@fullcalendar/react";
 import { Grid, Fab, makeStyles, useTheme, Icon } from "@material-ui/core";
 import dayGridPlugin from "@fullcalendar/daygrid";

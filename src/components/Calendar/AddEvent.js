@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./css/DialogCustom.css";
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import moment from "moment";
-import clsx from 'clsx';
 import * as yup from "yup";
 import {
   Icon,
@@ -32,32 +31,32 @@ import { green } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
     width: "100%",
   },
   wrapper: {
     margin: theme.spacing(1),
-    position: 'relative',
+    position: "relative",
   },
   buttonSuccess: {
     backgroundColor: green[500],
-    '&:hover': {
+    "&:hover": {
       backgroundColor: green[700],
     },
   },
   fabProgress: {
     color: green[500],
-    position: 'absolute',
+    position: "absolute",
     top: -6,
     left: -6,
     zIndex: 1,
   },
   buttonProgress: {
     color: green[500],
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
     marginTop: -12,
     marginLeft: -12,
   },
@@ -94,13 +93,7 @@ export default function FullEvent({
   const theme = useTheme();
   const [locale, setLocale] = useState(theme.chosenLang);
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
-  const [successDelete, setSuccessDelete] = useState(false);
-
-  const buttonClassname = clsx({
-    [classes.buttonSuccess]: success,
-  });
 
   useEffect(() => {
     setLocale(theme.chosenLang);
@@ -121,7 +114,6 @@ export default function FullEvent({
 
   const deleteEventForm = (id, isTrainee) => {
     if (!loading) {
-      setSuccessDelete(false);
       setLoadingDelete(true);
     }
     const eventCustomId = parseInt(id);
@@ -132,7 +124,6 @@ export default function FullEvent({
       selectedTrainees
     )
       .then((res) => {
-        setSuccessDelete(true);
         setLoadingDelete(false);
         setIsError(false);
         onClose();
@@ -165,12 +156,10 @@ export default function FullEvent({
     }
   }, [preSelected]);
 
-  useEffect(() => {
-  }, [selectedTrainees]);
+  useEffect(() => {}, [selectedTrainees]);
 
   const onEditSubmit = async (data) => {
     if (!loading) {
-      setSuccess(false);
       setLoading(true);
     }
 
@@ -197,7 +186,6 @@ export default function FullEvent({
     submitData.selectedTrainees = selectedTrainees;
     handleSubmitEvent(submitData)
       .then((res) => {
-        setSuccess(true);
         setLoading(false);
         setIsError(false);
         onClose();
@@ -210,7 +198,6 @@ export default function FullEvent({
 
   const onSubmitForm = async (data) => {
     if (!loading) {
-      setSuccess(false);
       setLoading(true);
     }
     const submitData = { ...data };
@@ -231,7 +218,6 @@ export default function FullEvent({
 
     handleSubmitEvent(submitData, selectedTrainees)
       .then((res) => {
-        setSuccess(true);
         setLoading(false);
         setIsError(false);
         onClose();
@@ -242,8 +228,7 @@ export default function FullEvent({
       });
   };
 
-  useEffect(() => {
-  }, [eventInfo]);
+  useEffect(() => {}, [eventInfo]);
 
   const handleTrainees = (event, value, reason) => {
     let removedDup = value.reduce((unique, o) => {
@@ -383,7 +368,9 @@ export default function FullEvent({
                         className="fas fa-times"
                       />
                     </IconButton>
-                    {isEditMode ? t("EVENT_EDIT_WORKOUT") : t("EVENT_ADD_WORKOUT")}
+                    {isEditMode
+                      ? t("EVENT_EDIT_WORKOUT")
+                      : t("EVENT_ADD_WORKOUT")}
                   </DialogTitle>
                   {!isEditMode && (
                     <DialogContentText style={{ textAlign: "start" }}>
@@ -710,6 +697,7 @@ export default function FullEvent({
                             {isTabletOrMobile ? "" : t("EDIT")}
                           </Button>
                           <Button
+                            disabled={loadingDelete}
                             endIcon={
                               <Icon
                                 style={
@@ -724,14 +712,18 @@ export default function FullEvent({
                             }}
                           >
                             {isTabletOrMobile ? "" : t("DELETE")}
-                            {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                            {loadingDelete && (
+                              <CircularProgress
+                                size={24}
+                                className={classes.buttonProgress}
+                              />
+                            )}
                           </Button>
                         </>
                       )}
 
                       <Button
                         type="submit"
-                        className={buttonClassname}
                         disabled={loading}
                         endIcon={
                           <Icon
@@ -747,11 +739,13 @@ export default function FullEvent({
                         //    onClick={onSubmit}
                       >
                         {isTabletOrMobile ? "" : t("SUBMIT")}
-                        {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
-
+                        {loading && (
+                          <CircularProgress
+                            size={24}
+                            className={classes.buttonProgress}
+                          />
+                        )}
                       </Button>
-
-                 
                     </div>
                   </DialogActions>
                 </Grid>

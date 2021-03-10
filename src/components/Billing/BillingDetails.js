@@ -16,7 +16,7 @@ import ControlFitContext from "../Context/ControlFitContext";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Alert, Autocomplete } from "@material-ui/lab";
-import { updateTrainee } from "../../Util/Firebase";
+import { updateTrainee } from "../../services/FirebaseTraineesService";
 import { useTranslation } from "react-i18next";
 import "../TraineeDetails/Tab/css/tracker.css";
 

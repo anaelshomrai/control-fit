@@ -27,12 +27,16 @@ import "./css/drawer.css";
 import {
   updateEvent,
   deleteEvent,
+  addEvent,
+} from "../../services/FirebaseEventsService";
+import {
+  updateTraineeField,
+  getTraineeWorkouts,
+} from "../../services/FirebaseTraineesService";
+import {
   getCurrentIds,
   increaseEventId,
-  updateTraineeField,
-  addEvent,
-  getTraineeWorkouts,
-} from "../../Util/Firebase";
+} from "../../services/FirebaseIDsService";
 import moment from "moment";
 import ControlFitContext from "../Context/ControlFitContext";
 import { useContext } from "react";

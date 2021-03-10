@@ -13,6 +13,7 @@ import moment from "moment";
 import 'moment/locale/he';
 import { lazy } from 'react';
 import { Suspense } from "react";
+import { useTranslation } from "react-i18next";
 
 
 /*
@@ -20,13 +21,13 @@ import { Suspense } from "react";
     Creation date: 02/09/2018 12:17
     <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 */
-
 const FitRouter = lazy(() => import('./components/Navigation/FitRouter'));
-const renderLoader = () => <p>Loading</p>;
 
 
 function App() {
   const theme = useTheme();
+  const { t } = useTranslation();
+  const renderLoader = () => <p>{t("TRAINEE_HOME_LOADING")}</p>;
 
   document.body.dir = i18n.dir();
   theme.direction = i18n.dir();

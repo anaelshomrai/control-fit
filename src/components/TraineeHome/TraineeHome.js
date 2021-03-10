@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  uploadFile,
-  addTrainee,
-  addTraineeFilesIntial,
   addTraineesProgram,
-} from "../../Util/Firebase";
+} from "../../services/FirebaseProgramsService";
+import {
+  uploadFile,
+} from "../../services/FirebaseGeneralService";
+import {addTrainee,addTraineeFilesIntial} from "../../services/FirebaseTraineesService";
 import TraineeCard from "./TraineeCard";
 import AddTraineeDialog from "../TraineeForm/AddTraineeDialog";
 import InfiniteScroll from "react-infinite-scroller";

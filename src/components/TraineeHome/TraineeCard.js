@@ -3,9 +3,13 @@ import "./css/card.css";
 import {
   getCurrentIds,
   increaseEventId,
-  storageRef,
+} from "../../services/FirebaseIDsService";
+import {
   deleteTrainee,
   updateTraineeField,
+} from "../../services/FirebaseTraineesService";
+import {
+  storageRef,
 } from "../../Util/Firebase";
 import FullEvent from "../Calendar/AddEvent";
 import { Link } from "react-router-dom";
