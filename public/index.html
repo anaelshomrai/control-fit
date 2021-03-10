@@ -10,8 +10,22 @@
       content="ControlFit"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon-controlfit.png" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap" />
-    <script src="https://kit.fontawesome.com/d5ef23bc68.js" crossorigin="anonymous"></script>
+    <link
+    rel="preload"
+    href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap"
+    as="style"
+    onload="this.onload=null;this.rel='stylesheet'"
+/>
+<noscript>
+    <link
+        href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap"
+        rel="stylesheet"
+        type="text/css"
+    />
+</noscript>
+
+    <script async src="https://kit.fontawesome.com/d5ef23bc68.js" crossorigin="anonymous"></script>
+
   <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
 
