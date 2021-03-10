@@ -1,6 +1,6 @@
 import "./App.css";
 import { ProvideAuth } from "./components/Auth/ProvideAuth";
-import FitRouter from "./components/Navigation/FitRouter";
+//import FitRouter from "./components/Navigation/FitRouter";
 import FitMenu from "./components/Navigation/FitMenu";
 import FitFooter from "./components/Navigation/FitFooter";
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -11,6 +11,8 @@ import withRoot from "./Util/withRoot";
 import i18n from "./i18n/i18n";
 import moment from "moment";
 import 'moment/locale/he';
+import { lazy } from 'react';
+import { Suspense } from "react";
 
 
 /*
@@ -18,6 +20,10 @@ import 'moment/locale/he';
     Creation date: 02/09/2018 12:17
     <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 */
+
+const FitRouter = lazy(() => import('./components/Navigation/FitRouter'));
+const renderLoader = () => <p>Loading</p>;
+
 
 function App() {
   const theme = useTheme();
@@ -44,7 +50,10 @@ function App() {
         {/* Has height of 10% */}
         <FitMenu changeLanguage={changeLanguage}/> 
                 {/* Has height of 90% */}
-          <FitRouter/>
+                <Suspense fallback={renderLoader()}>
+                <FitRouter/>
+   </Suspense>
+        
           </MuiPickersUtilsProvider>
         </Grid>
         <FitFooter/>

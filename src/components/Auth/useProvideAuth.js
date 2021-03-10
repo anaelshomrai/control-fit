@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import {signIn,signOut,auth } from '../../Util/Firebase';
+import {signIn,signOut,auth
+ //, oneTimeNameUpdate
+ } from '../../Util/Firebase';
 
 export default function useProvideAuth() {
     const [user, setUser] = useState(null);
@@ -19,6 +21,7 @@ export default function useProvideAuth() {
     const signin = (email,pass) => {
       return signIn(email,pass).then((res) => {
         setUser(res.user);
+        //oneTimeNameUpdate();
         return null;
 
       })
