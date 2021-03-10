@@ -609,7 +609,7 @@ export default function TraineeDetails(props) {
               indicatorColor="primary"
               textColor="primary"
               aria-label="scrollable auto tabs example"
-              classes={{
+              classes={isTabletOrMobile ? {} : {
                 flexContainer: "spaceEven", // class name, e.g. `classes-nesting-root-x`
               }}
             >

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./css/DialogCustom.css";
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import moment from "moment";
+import clsx from 'clsx';
 import * as yup from "yup";
 import {
   Icon,
@@ -20,16 +21,45 @@ import {
   InputAdornment,
   useMediaQuery,
   useTheme,
+  CircularProgress,
 } from "@material-ui/core";
 import { Alert, Autocomplete } from "@material-ui/lab";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useTranslation } from "react-i18next";
 import MomentUtils from "@date-io/moment";
+import { green } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    display: 'flex',
+    alignItems: 'center',
     width: "100%",
+  },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: 'relative',
+  },
+  buttonSuccess: {
+    backgroundColor: green[500],
+    '&:hover': {
+      backgroundColor: green[700],
+    },
+  },
+  fabProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: -6,
+    left: -6,
+    zIndex: 1,
+  },
+  buttonProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
   },
   button: {
     marginRight: theme.spacing(1),
@@ -63,6 +93,14 @@ export default function FullEvent({
   const [isError, setIsError] = useState(false);
   const theme = useTheme();
   const [locale, setLocale] = useState(theme.chosenLang);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [loadingDelete, setLoadingDelete] = useState(false);
+  const [successDelete, setSuccessDelete] = useState(false);
+
+  const buttonClassname = clsx({
+    [classes.buttonSuccess]: success,
+  });
 
   useEffect(() => {
     setLocale(theme.chosenLang);
@@ -82,6 +120,10 @@ export default function FullEvent({
   };
 
   const deleteEventForm = (id, isTrainee) => {
+    if (!loading) {
+      setSuccessDelete(false);
+      setLoadingDelete(true);
+    }
     const eventCustomId = parseInt(id);
     deleteEvent(
       eventCustomId,
@@ -90,10 +132,13 @@ export default function FullEvent({
       selectedTrainees
     )
       .then((res) => {
-        onClose();
+        setSuccessDelete(true);
+        setLoadingDelete(false);
         setIsError(false);
+        onClose();
       })
       .catch((e) => {
+        setLoadingDelete(false);
         setIsError("Something went wrong. Please try again later");
       });
   };
@@ -124,6 +169,11 @@ export default function FullEvent({
   }, [selectedTrainees]);
 
   const onEditSubmit = async (data) => {
+    if (!loading) {
+      setSuccess(false);
+      setLoading(true);
+    }
+
     const submitData = { ...data };
     delete submitData.traineesSelection;
 
@@ -147,15 +197,22 @@ export default function FullEvent({
     submitData.selectedTrainees = selectedTrainees;
     handleSubmitEvent(submitData)
       .then((res) => {
+        setSuccess(true);
+        setLoading(false);
         setIsError(false);
         onClose();
       })
       .catch((e) => {
+        setLoading(false);
         setIsError("Something went wrong. Please try again later");
       });
   };
 
   const onSubmitForm = async (data) => {
+    if (!loading) {
+      setSuccess(false);
+      setLoading(true);
+    }
     const submitData = { ...data };
 
     //cleanup
@@ -174,10 +231,13 @@ export default function FullEvent({
 
     handleSubmitEvent(submitData, selectedTrainees)
       .then((res) => {
+        setSuccess(true);
+        setLoading(false);
         setIsError(false);
         onClose();
       })
       .catch((e) => {
+        setLoading(false);
         setIsError("Something went wrong. Please try again later");
       });
   };
@@ -664,12 +724,15 @@ export default function FullEvent({
                             }}
                           >
                             {isTabletOrMobile ? "" : t("DELETE")}
+                            {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
                           </Button>
                         </>
                       )}
 
                       <Button
                         type="submit"
+                        className={buttonClassname}
+                        disabled={loading}
                         endIcon={
                           <Icon
                             style={
@@ -684,7 +747,11 @@ export default function FullEvent({
                         //    onClick={onSubmit}
                       >
                         {isTabletOrMobile ? "" : t("SUBMIT")}
+                        {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+
                       </Button>
+
+                 
                     </div>
                   </DialogActions>
                 </Grid>

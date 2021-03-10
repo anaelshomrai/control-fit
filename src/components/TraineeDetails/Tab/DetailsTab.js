@@ -1,10 +1,12 @@
 import {
+  CircularProgress,
   ClickAwayListener,
   Fab,
   FormControlLabel,
   FormLabel,
   Grid,
   Icon,
+  makeStyles,
   Radio,
   RadioGroup,
   TextField,
@@ -17,6 +19,41 @@ import * as Yup from "yup";
 import { phoneRegExp } from "../../../Util/regex";
 import { Alert } from "@material-ui/lab";
 import { useTranslation } from "react-i18next";
+import { useStyles } from "@material-ui/pickers/views/Calendar/SlideTransition";
+import { green } from "@material-ui/core/colors";
+import clsx from 'clsx';
+
+const useMyStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: 'relative',
+  },
+  buttonSuccess: {
+    backgroundColor: green[500],
+    '&:hover': {
+      backgroundColor: green[700],
+    },
+  },
+  fabProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: -6,
+    left: -6,
+    zIndex: 1,
+  },
+  buttonProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
+  },
+}));
 export default function DetailsTab({ id, trainee, handleDetailsUpdate }) {
   const [disabled, setDisabled] = useState(true);
   const isTabletOrMobile = useMediaQuery("(max-width: 1224px)");
@@ -24,6 +61,13 @@ export default function DetailsTab({ id, trainee, handleDetailsUpdate }) {
   const { t } = useTranslation();
   const theme = useTheme();
   const [direction,setDirection] = useState(theme.direction);
+  const classes = useMyStyles();
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const buttonClassname = clsx({
+    [classes.buttonSuccess]: success,
+  });
 
   useEffect(() => {
     setDirection(theme.direction);
@@ -43,12 +87,20 @@ export default function DetailsTab({ id, trainee, handleDetailsUpdate }) {
       }}
       enableReinitialize={true}
       onSubmit={(values, { setSubmitting }) => {
-        setDisabled(!disabled);
+        if (!loading) {
+      setSuccess(false);
+      setLoading(true);
+
+    }
         handleDetailsUpdate(values)
           .then((res) => {
+            setDisabled(!disabled);
             setIsError(false);
+            setSuccess(true);
+            setLoading(false);
           })
           .catch((e) => {
+        setLoading(false);
             console.error("formik error", e);
             setIsError(t("TRAINEE_DETAILS_TAB_UPDATE_ERROR"));
           });
@@ -467,6 +519,8 @@ export default function DetailsTab({ id, trainee, handleDetailsUpdate }) {
                     type="submit"
                     variant="extended"
                     color="primary"
+                    className={buttonClassname}
+                    disabled={loading}
                     size={isTabletOrMobile ? "small" : "medium"}
                     onClick={(e) => {
                       // setDisabled(!disabled);
@@ -476,6 +530,7 @@ export default function DetailsTab({ id, trainee, handleDetailsUpdate }) {
                     <Icon>save</Icon>
 
                     {isTabletOrMobile ? "" : t("SAVE")}
+                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
                   </Fab>
                 )}
               </Grid>
